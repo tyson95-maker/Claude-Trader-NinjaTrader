@@ -31,8 +31,8 @@ namespace NinjaTrader.NinjaScript.Strategies
 		#region Variables
 
 		// Signal file monitoring
-		private string signalsFilePath = @"C:\Users\Joshua\Documents\Projects\Claude Trader\data\trade_signals.csv";
-		private string tradesLogFilePath = @"C:\Users\Joshua\Documents\Projects\Claude Trader\data\trades_taken.csv";
+		private string signalsFilePath = System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.UserProfile), @"Documents\Projects\Claude Trader\data\trade_signals.csv");
+		private string tradesLogFilePath = System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.UserProfile), @"Documents\Projects\Claude Trader\data\trades_taken.csv");
 		private DateTime lastFileCheckTime = DateTime.MinValue;
 		private HashSet<string> processedSignals = new HashSet<string>();
 		private DateTime lastFileModified = DateTime.MinValue;
@@ -83,8 +83,8 @@ namespace NinjaTrader.NinjaScript.Strategies
 				IsInstantiatedOnEachOptimizationIteration = true;
 
 				// Parameters
-				SignalsFilePath = @"C:\Users\Joshua\Documents\Projects\Claude Trader\data\trade_signals.csv";
-				TradesLogFilePath = @"C:\Users\Joshua\Documents\Projects\Claude Trader\data\trades_taken.csv";
+				SignalsFilePath = System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.UserProfile), @"Documents\Projects\Claude Trader\data\trade_signals.csv");
+				TradesLogFilePath = System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.UserProfile), @"Documents\Projects\Claude Trader\data\trades_taken.csv");
 				FileCheckInterval = 2;
 				ContractQuantity = 2;
 			}
@@ -94,9 +94,9 @@ namespace NinjaTrader.NinjaScript.Strategies
 			}
 			else if (State == State.DataLoaded)
 			{
-				// FORCE CORRECT FILE PATHS (override any cached config)
-				signalsFilePath = @"C:\Users\Joshua\Documents\Projects\Claude Trader\data\trade_signals.csv";
-				tradesLogFilePath = @"C:\Users\Joshua\Documents\Projects\Claude Trader\data\trades_taken.csv";
+				// FORCE CORRECT FILE PATHS (override any cached config) — uses %USERPROFILE% so it works on any machine
+				signalsFilePath = System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.UserProfile), @"Documents\Projects\Claude Trader\data\trade_signals.csv");
+				tradesLogFilePath = System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.UserProfile), @"Documents\Projects\Claude Trader\data\trades_taken.csv");
 
 				// Initialize processed signals tracking
 				processedSignals = new HashSet<string>();

@@ -38,7 +38,7 @@ namespace NinjaTrader.NinjaScript.Strategies
             }
             else if (State == State.Configure)
             {
-                filePath = @"C:\Users\Joshua\Documents\Projects\Claude Trader\data\HistoricalData.csv";
+                filePath = System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.UserProfile), @"Documents\Projects\Claude Trader\data\HistoricalData.csv");
             }
             else if (State == State.DataLoaded)
             {
